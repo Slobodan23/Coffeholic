@@ -1,21 +1,18 @@
 package com.coffeholic.coffeholicbackend.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
-@Entity
+@Document(collection = "addons")
 public class Addons {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false)
+    private String id;
     private String name;
-    @Column(nullable = false)
     private Float temperatureStore;
-    @Column(nullable = false)
     private Float price;
-    @Column(nullable = false)
     private String description;
-    @ManyToOne(optional = false)
+    @DBRef
     private Recipe recipe;
 
     public Addons() {
@@ -29,11 +26,11 @@ public class Addons {
         this.recipe = recipe;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

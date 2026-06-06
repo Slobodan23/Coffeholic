@@ -1,15 +1,15 @@
 package com.coffeholic.coffeholicbackend.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
-@Entity
+@Document(collection = "coffes")
 public class Coffe {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false)
+    private String id;
     private String name;
-    @OneToMany(mappedBy = "coffe")
+    @DBRef
     private Recipe recipe;
 
     public Coffe() {
@@ -24,11 +24,11 @@ public class Coffe {
         this.recipe = recipe;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -1,18 +1,18 @@
 package com.coffeholic.coffeholicbackend.model;
 
 import java.util.List;
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
-@Entity
+@Document(collection = "cities")
 public class City {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false)
+    private String id;
     private String naziv;
-    @ManyToOne(optional = false)
+    @DBRef
     private Country country;
-    @OneToMany(mappedBy = "city")
+    @DBRef
     private List<Beans> beans;
 
     public City() {
@@ -29,11 +29,11 @@ public class City {
         this.beans = beans;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
